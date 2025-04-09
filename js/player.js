@@ -23,12 +23,41 @@ export default class Player {
       x: 0,
       y: 0
     };
+  
   }
+
+  get right(){
+    return this.position.x + this.width;
+  }
+  get bottom(){
+    return this.position.y + this.height;
+  }
+  get top(){
+    return this.position.y;
+  }
+  get left(){
+    return this.position.x;
+  }
+
+
+
 
   /**
    * Main function to update location, velocity, and image
    */
   update() {
+    //Add gravity to the hero
+    this.velocity.y += GRAVITY;
+
+    //If we hit the floor it stop
+    if (this.bottom >= FLOOR){
+      this.velocity.y = 0;
+      this.position.y = FLOOR - this.height;
+    }
+
+    //Add the location of the hero
+    this.position.x += this.velocity.x;
+    this.position.y += this.velocity.y;
     this.draw();
   }
 
@@ -39,4 +68,11 @@ export default class Player {
     CTX.fillStyle = "yellow";
     CTX.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
+   
+    jump(){
+      this.position.y -= 2;
+     this.velocity.y = -20;
+  }
 }
+
+
