@@ -13,7 +13,11 @@ import Player from "./player.js";
 import { CANVAS, CTX, MS_PER_FRAME, KEYS } from "./globals.js";
 
 // Globals
-const HERO = new Player(20, 20, 48, 48);
+const HERO = new Player(90, 20, 48, 48);
+let ground = new Image();
+  ground.src = "../images/dino_large.png"
+    ground.x_pos = 0
+
 
 let frame_time = performance.now()
 
@@ -56,11 +60,24 @@ function update() {
   
   // Clear the canvas
   CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
+
+  //Draw the ground
+  
+  //Draw imgaes(img, sx, sy, sw, sh, dx, dy, dw, dh)
+  CTX.drawImage(ground, 0, 103, 2300, 26, ground.x_pos, 300, 2300, 28)
+  ground.x_pos -= 5;
   
   // Draw our hero
   HERO.update();
+
+
+  function ImageLoop(){
+    const widthEl = document.querySelector('./images/dino_large.png . :first-child').offsetwidth + 24
+    imageWrapper.style.left = `${ground.x_pos * widthEl}px`
+  }
   
 }
 
 // Start the animation
 update()
+

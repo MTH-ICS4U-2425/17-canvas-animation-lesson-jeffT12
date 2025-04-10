@@ -26,18 +26,14 @@ export default class Player {
   
   }
 
-  get right(){
-    return this.position.x + this.width;
-  }
-  get bottom(){
-    return this.position.y + this.height;
-  }
-  get top(){
-    return this.position.y;
-  }
-  get left(){
-    return this.position.x;
-  }
+  get right(){return this.position.x + this.width;}
+  get bottom(){return this.position.y + this.height;}
+  get top(){return this.position.y;}
+  get left(){return this.position.x;}
+  set bottom(location){this.position.y = location - this.height;}
+  set right(location){this.position.x = location - this.width;}
+  set top(location){this.position.y = location;}
+  set left(location){this.position.x = location;}
 
 
 
@@ -50,9 +46,9 @@ export default class Player {
     this.velocity.y += GRAVITY;
 
     //If we hit the floor it stop
-    if (this.bottom >= FLOOR){
+    if (this.bottom > FLOOR){
       this.velocity.y = 0;
-      this.position.y = FLOOR - this.height;
+      this.bottom = FLOOR;
     }
 
     //Add the location of the hero
@@ -70,8 +66,11 @@ export default class Player {
   }
    
     jump(){
-      this.position.y -= 2;
-     this.velocity.y = -20;
+      if(this.bottom >= FLOOR){
+        this.bottom = FLOOR;
+       this.velocity.y = -22;
+
+      }
   }
 }
 
