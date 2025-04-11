@@ -46,9 +46,11 @@ export default class Player {
     this.velocity.y += GRAVITY;
 
     //If we hit the floor it stop
-    if (this.bottom > FLOOR){
+    if (this.bottom + this.velocity.y >= FLOOR){
       this.velocity.y = 0;
       this.bottom = FLOOR;
+    } else {
+      this.velocity.y += GRAVITY;
     }
 
     //Add the location of the hero
@@ -68,7 +70,7 @@ export default class Player {
     jump(){
       if(this.bottom >= FLOOR){
         this.bottom = FLOOR;
-       this.velocity.y = -22;
+       this.velocity.y = -32;
 
       }
   }

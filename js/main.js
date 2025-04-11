@@ -10,6 +10,7 @@
 'use strict';
 
 import Player from "./player.js";
+
 import { CANVAS, CTX, MS_PER_FRAME, KEYS } from "./globals.js";
 
 // Globals
@@ -34,8 +35,8 @@ document.addEventListener("contextmenu", (event) => {
  * The user pressed a key on the keyboard 
  */
 function keypress(event) {
-  console.log(event.keyCode)
-  if(event.keyCode == KEYS.SPACE){
+  if([KEYS.W, KEYS.UP_ARROW, KEYS.SPACE].includes(event.keyCode)){
+    console.log(HERO.bottom, HERO.velocity.y)
     HERO.jump();
   }
 }
@@ -69,12 +70,6 @@ function update() {
   
   // Draw our hero
   HERO.update();
-
-
-  function ImageLoop(){
-    const widthEl = document.querySelector('./images/dino_large.png . :first-child').offsetwidth + 24
-    imageWrapper.style.left = `${ground.x_pos * widthEl}px`
-  }
   
 }
 
